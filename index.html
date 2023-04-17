@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Signup Registration Form</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    .form-container {
+      max-width: 500px;
+      margin: auto;
+      background-color: rgba(127, 255, 212, 0.644);
+      padding: 40px;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .form-group input[type="text"], 
+    .form-group input[type="tel"], 
+    .form-group input[type="email"], 
+    .form-group input[type="password"] {
+      border-radius: 0;
+    }
+    .btn-primary {
+      border-radius: 0;
+      width: 100%;
+    }
+    .text-center{
+        font-weight: 900;
+    }
+    body{
+        background-color: rgb(232, 245, 220);
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-6 mt-5 form-container">
+        <form name="userForm" id="userForm" novalidate>
+          <h3 class="text-center mb-3">User Registration Form</h3>
+          <div class="form-group">
+            <label for="username"> Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" required>
+            <div id="nameErr" class="text-danger"></div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" required>
+            <div id="phoneErr" class="text-danger"></div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" required>
+            <div id="emailErr" class="text-danger"></div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+            <div id="passErr" class="text-danger"></div>
+          </div>
+          <div class="form-group">
+            <label for="password">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPass"  placeholder="Enter Password Again" name="confirmPass" required>
+            <div id="confirmpassErr" class="text-danger"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    
+
+    const form = document.querySelector('form');
+
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const name = document.querySelector('#name').value;
+  const email = document.querySelector('#email').value;
+  const phone = document.querySelector('#phone').value;
+  let password = form['password'].value.trim() 
+  let confirmPass = form ['confirmPass'].value.trim() 
+
+
+  localStorage.setItem('name', name);
+  localStorage.setItem('email', email);
+  localStorage.setItem('phone', phone);
+
+
+        if( name == ""){
+            nameErr = "Name is required"
+         document.getElementById('nameErr').innerHTML=nameErr
+        }
+
+        if( email == ""){
+            emailErr = "Email is required"
+          document.getElementById('emailErr').innerHTML=emailErr
+        }
+        
+         else if(email.includes('@') != true || email.includes('.') != true || email.endsWith('@' == true)){
+             emailErr = 'Invalid Email'
+             document.getElementById('emailErr').innerHTML=emailErr
+         }
+
+        if( phone == ""){
+            phoneErr = "Phone is required"
+         document.getElementById('phoneErr').innerHTML=phoneErr
+        }
+        
+       else if (phone.length != 11){
+        phoneErr = "Phone Number is not correct"
+        document.getElementById('phoneErr').innerHTML=phoneErr
+
+       }
+
+       else if ( phone.startsWith('080') != true &&
+                phone.startsWith('081') != true &&
+                phone.startsWith('090') != true &&
+                phone.startsWith('070') != true &&
+                phone.startsWith('091') != true) {
+                 phoneErr = "Invalid Phone Code"
+                  document.getElementById('phoneErr').innerHTML=phoneErr
+
+        }
+
+        
+       if(password== ''){
+         passErr= 'Password is required'
+        }
+        else if(password.length < 6 ){
+            passErr='Password Length is weak'         
+         }
+         document.getElementById('passErr').innerHTML=passErr
+
+         
+       if(confirmPass == ''){
+        confirmpassErr= 'Password is required again'
+        document.getElementById('confirmpassErr').innerHTML=confirmpassErr
+        }
+        else if(confirmPass != password ){
+            confirmpassErr='Password is not the same'  
+            document.getElementById('confirmpassErr').innerHTML=confirmpassErr       
+         }
+
+        else{
+            alert("Informations have been updated")
+        }
+    })
+ 
+  </script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
