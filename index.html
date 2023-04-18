@@ -86,12 +86,6 @@ form.addEventListener('submit', function(event) {
   let password = form['password'].value.trim() 
   let confirmPass = form ['confirmPass'].value.trim() 
 
-
-  localStorage.setItem('name', name);
-  localStorage.setItem('email', email);
-  localStorage.setItem('phone', phone);
-
-
         if( name == ""){
             nameErr = "Name is required"
          document.getElementById('nameErr').innerHTML=nameErr
@@ -150,6 +144,11 @@ form.addEventListener('submit', function(event) {
         else{
             alert("Informations have been updated")
         }
+     
+            localStorage.setItem('name', name);
+            localStorage.setItem('email', email);
+            localStorage.setItem('phone', phone);
+
     })
  
   </script>
